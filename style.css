@@ -1,0 +1,21 @@
+ul {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+}
+
+ul li {
+    list-style: none;
+    border: solid black;
+    border-collapse: collapse;
+}
+
+li i {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+i.tick {
+}
+

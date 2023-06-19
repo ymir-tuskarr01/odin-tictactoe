@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin Tic Tac Toe</title>
     <script defer src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <aside></aside>
+    <main>
+        <header></header>
+        <section id="gameModule">
+            <h1>Tic Tac Toe</h1>
+            <ul id="gameBoard">
+                <script id="gameboard-template" type="text/template">
+                    {{#gameboard}}
+                        <li>
+                            <i class="tick" data-board-no="{{dataBoardNumber}}" data-player-tick="{{dataPlayerTick}}"></i>
+                        </li>
+                    {{/gameboard}}
+                </script>
+            </ul>
+        </section>
+        <footer></footer>
+    </main>
 </body>
 </html>
