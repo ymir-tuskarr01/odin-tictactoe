@@ -1,7 +1,7 @@
 # odin-tictactoe
 
-❌⭕⭕
-⭕❌❌
+❌⭕⭕\
+⭕❌❌\
 ❌❌⭕
 
 Make a tictactoe game
