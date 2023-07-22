@@ -9,20 +9,124 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <dialog id="nextGameDialog">
+        <p id="nextGameStatement">
+            <script id="nextgamestatement-template" type="text/template">
+                {{#announceboard}}
+                    {{dataText}} How about another match?
+                {{/announceboard}}
+            </script>
+        </p>
+        <button class="dialogBtn confirm">Confirm</button>
+        <button class="dialogBtn cancel">Cancel</button>
+    </dialog>
     <aside></aside>
     <main>
         <header></header>
         <section id="gameModule">
             <h1>Tic Tac Toe</h1>
-            <ul id="gameBoard">
-                <script id="gameboard-template" type="text/template">
-                    {{#gameboard}}
-                        <li>
-                            <i class="tick" data-board-no="{{dataBoardNumber}}" data-player-tick="{{dataPlayerTick}}"></i>
-                        </li>
-                    {{/gameboard}}
-                </script>
-            </ul>
+            <fieldset id="gameMode">
+                <legend>Select the mode:</legend>
+
+                <ul>
+                    <li>
+                        <label for="pvp">Versus Another Player</label>
+                        <input type="radio" name="mode" id="pvp" value="pvp" checked>
+                    </li>
+                    <li>
+                        <label for="pvc">Versus Computer</label>
+                        <input type="radio" name="mode" id="pvc" value="pvc">
+                    </li>
+                </ul>
+            </fieldset>
+            <article id="statsCard">
+                <details id="playerStats" open>
+                    <summary>DashBoard</summary>
+                    <table>
+                        <caption>Player stats</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Player</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Current</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="playerStatsRow">
+                            <script id="playerstatsrow-template" type="text/template">
+                                {{#playerstatsrow}}
+                                    <tr>
+                                        <td scope="row">{{dataPlayerLength}}</td>
+                                        <td>{{dataPlayerName}}</td>
+                                        <td>{{dataPlayerCurrentScore}}</td>
+                                        <td>{{dataPlayerTotalScore}}</td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td scope="row">2</td>
+                                        <td>Player2</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr> -->
+                                {{/playerstatsrow}}
+                            </script>
+                        </tbody>
+                    </table>
+                </details>
+            </article>
+            <article id="gameCard">
+                <form>
+                    <fieldset id="playerDetails">
+                        <legend>Enter your name:</legend>
+                        <ul>
+                            <li>
+                                <label for="p1name">Player 1:</label>
+                                <input type="text" name="p1name" id="p1name" placeholder="Tic as Joe" value="test1" required>
+                            </li>
+                            <li id="p2Details">
+                                <label for="p2name">Player 2:</label>
+                                <input type="text" name="p2name" id="p2name" placeholder="Squishy Toe" required>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <p id="gameInitBtn">
+                        <script id="startbtn-template" type="text/template">
+                            {{#startbtn}}
+                                <button id="startBtn" type="button" class="{{dataStart}}">Start</button>
+                                <button id="resetBtn" type="button" class="{{dataReset}}">Reset</button>
+                                <button id="newBtn" type="button" class="{{dataNew}}">New</button>
+                            {{/startbtn}}
+                        </script>
+                    </p>
+                </form>
+                <p id="announceBoard">
+                    <script id="announceboard-template" type="text/template">
+                        {{#announceboard}}
+                            {{dataText}}
+                        {{/announceboard}}
+                    </script>
+                </p>
+                <p id="alertBoard">
+                    <script id="alertboard-template" type="text/template">
+                        {{#alertboard}}
+                            {{dataText}}
+                        {{/alertboard}}
+                    </script>
+                </p>
+                <ul id="gameBoard">
+                    <script id="gameboard-template" type="text/template">
+                        {{#gameboard}}
+                            <li data-board-no="{{dataBoardNumber}}" data-player-tick="{{dataPlayerTick}}">
+                                <i class="tickCross {{dataCross}}"></i>
+                                <i class="tickRound {{dataRound}}"></i>
+                                <i class="lineHorizontal glow winLine {{dataHorizontal}}"></i>
+                                <i class="lineVertical winLine {{dataVertical}}"></i>
+                                <i class="lineDiagonalOne winLineDiagonal {{dataDiagonalOne}}"></i>
+                                <i class="lineDiagonalTwo winLineDiagonal {{dataDiagonalTwo}}"></i>
+                            </li>
+                        {{/gameboard}}
+                    </script>
+                </ul>
+            </article>
         </section>
         <footer></footer>
     </main>

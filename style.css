@@ -1,21 +1,122 @@
-ul {
-    display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
+:root {
+    --boxNum: 3;
 }
 
-ul li {
+li {
     list-style: none;
+}
+
+body {
+    margin: 0;
+}
+
+#gameModule {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2rem;
+}
+
+#gameModule > * {
+    flex: 1 100%;
+}
+
+
+
+form#playerDetails {
+    display: flex;
+    gap: 10px;
+    flex-flow: column wrap;
+}
+
+ul#gameBoard {
+    display: grid;
+    grid-template-rows: repeat(var(--boxNum), 100px);
+    grid-template-columns: repeat(var(--boxNum), 100px);
+    justify-content: center;
+}
+
+ul#gameBoard li {
     border: solid black;
     border-collapse: collapse;
+    position: relative;
 }
 
 li i {
     display: block;
-    width: 100px;
     height: 100px;
+    width: 100px;
+    position: absolute;
 }
 
-i.tick {
+i.tickCross {
+    background-image: url(asset/images/close-thick.svg);
 }
 
+i.tickRound {
+    background-image: url(asset/images/circle-outline.svg);
+}
+
+i.lineHorizontal {
+    background-image: url(asset/images/minus.svg);
+}
+
+i.lineVertical {
+    background-image: url(asset/images/minus.svg);
+    transform: rotate(90deg);
+}
+
+i.lineDiagonalOne {
+    background-image: url(asset/images/minus.svg);
+    transform: rotate(45deg);
+}
+
+i.lineDiagonalTwo {
+    background-image: url(asset/images/minus.svg);
+    transform: rotate(-45deg);
+}
+
+#playerDetails:not(:first-child),
+#p2Details,
+li i  {
+    visibility: hidden;
+}
+
+#p2Details.visible,
+li i.visible  {
+    visibility: visible
+}
+
+#gameMode,
+#gameCard button,
+#statsCard,
+#playerDetails {
+    display: none;
+}
+
+#gameCard button.visible {
+    display: inline-block
+}
+
+#gameMode.visible,
+#playerDetails.visible {
+    display: block;
+}
+
+#statsCard.visible {
+    display: flex;
+    justify-content: center;
+}
+
+#playerStats {
+    flex: 1 100%;
+}
+
+#gameCard {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#gameCard > * {
+    flex: 1 100%;
+}
