@@ -39,6 +39,7 @@ ul#gameBoard li {
     border: solid black;
     border-collapse: collapse;
     position: relative;
+    transition: border 1s ease-in;
 }
 
 li i {
@@ -119,4 +120,41 @@ li i.visible  {
 
 #gameCard > * {
     flex: 1 100%;
+}
+
+#playerStats table {
+    border-spacing: 0;
+}
+
+#playerStats th {
+    background: rgba(80, 80, 80, 0.3);
+}
+
+#playerStats tr:nth-child(odd){
+    background: rgba(80, 80, 80, 0.1);
+}
+
+#playerStats th:not(:first-child, :last-child),
+#playerStats td:not(:first-child, :last-child){
+    border-top: solid black;
+    border-bottom: solid black;
+
+    min-width: 100px;
+    text-align: left;
+}
+
+#playerStats .number {
+    text-align: right;
+}
+
+#playerStats th:is(:first-child),
+#playerStats td:is(:first-child){
+    border: solid black;
+    border-right: none;
+}
+
+#playerStats th:is(:last-child),
+#playerStats td:is(:last-child){
+    border: solid black;
+    border-left: none;
 }
