@@ -1,13 +1,13 @@
 # odin-tictactoe
 
-❌⭕⭕\
-⭕❌❌\
-❌❌⭕
+Live Demo:
+https://ymirtuskarr01.github.io/tictactoe
 
-Make a tictactoe game
+![Project Screenshot](./asset/images/tictactoe.png "TicTacToe")
 
-#pseudocode
+### Objectives
 
+Build a tictactoe game with:
 - 2 modes:
   - vs another player
   - vs computer
