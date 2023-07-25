@@ -436,8 +436,8 @@ const drawBoard = (() => {
     };
 
     let _updateBoard = () => {
-        const boardEditable = _session.currentBox.dataset.playerTick == 0 ? true : false;
-        if (!boardEditable) return;
+        let moveable = _moveable();
+        if (!moveable) return;
 
         const boardNo = _session.currentBox.dataset.boardNo;
 
@@ -449,6 +449,23 @@ const drawBoard = (() => {
 
         _checkMove();
     };
+
+    let _moveable = () => {
+
+        if (_player.length == 0) {
+            _checkFieldValidation["player"][0] = "Click the Start button";
+            _render();
+            return false;
+        }
+
+        const boardNotEditable = _session.currentBox.dataset.playerTick == 0 ? false : true;
+        if (boardNotEditable) return false;
+
+        if (_session.winMove) return false;
+
+        return true;
+    }
+
 
     let _checkMove = () => {
         const nextPlayerNum = _session.currentPlayerTurn == 0 ? 1 : 0;

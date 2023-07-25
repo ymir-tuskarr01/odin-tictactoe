@@ -165,3 +165,7 @@ li i.visible  {
     justify-content: space-between;
     width: 50%;
 }
+
+#alertBoard {
+    color: red;
+}
