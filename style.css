@@ -20,7 +20,9 @@ body {
     flex: 1 100%;
 }
 
-
+#gameModule > *:not(h1) {
+    flex: 1 50%;
+}
 
 form#playerDetails {
     display: flex;
@@ -28,14 +30,14 @@ form#playerDetails {
     flex-flow: column wrap;
 }
 
-ul#gameBoard {
+ul#board {
     display: grid;
     grid-template-rows: repeat(var(--boxNum), 100px);
     grid-template-columns: repeat(var(--boxNum), 100px);
     justify-content: center;
 }
 
-ul#gameBoard li {
+ul#board li {
     border: solid black;
     border-collapse: collapse;
     position: relative;
@@ -76,7 +78,6 @@ i.lineDiagonalTwo {
     transform: rotate(-45deg);
 }
 
-#playerDetails:not(:first-child),
 #p2Details,
 li i  {
     visibility: hidden;
@@ -89,7 +90,7 @@ li i.visible  {
 
 #gameMode,
 #gameCard button,
-#statsCard,
+#playerStats,
 #playerDetails {
     display: none;
 }
@@ -103,7 +104,7 @@ li i.visible  {
     display: block;
 }
 
-#statsCard.visible {
+#playerStats.visible {
     display: flex;
     justify-content: center;
 }
@@ -157,4 +158,10 @@ li i.visible  {
 #playerStats td:is(:last-child){
     border: solid black;
     border-left: none;
+}
+
+#gameMode li {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
 }

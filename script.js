@@ -2,7 +2,7 @@ const drawBoard = (() => {
     // ---  variable start  --- //
     // object value is inclusive except:
     // - player.playerInfo().num
-    let _gameboard = [
+    let _board = [
         0 , 0 , 0, 0, 0, 0, 0, 0, 0
     ];
 
@@ -43,9 +43,9 @@ const drawBoard = (() => {
         const size = _gameRule.boardSide;
         document.documentElement.style.setProperty('--boxNum', size);
 
-        _gameboard = [];
+        _board = [];
         for (let n = 0; n < (size * size); n++) {
-            _gameboard.push(0);
+            _board.push(0);
         }
 
         _updateMode();
@@ -55,19 +55,19 @@ const drawBoard = (() => {
     let _cacheDom = () => {
         gameMode = document.getElementById("gameMode");
         gameModeInput = gameMode.querySelectorAll('input[name="mode"]');
-        statsCard = document.getElementById("statsCard");
+        playerStats = document.getElementById("playerStats");
         nextGameDialog = document.getElementById("nextGameDialog");
         playerDetails = document.getElementById("playerDetails");
         playersField = playerDetails.querySelectorAll("#playerDetails input");
         player2Details = document.getElementById("p2Details");
         el = document.getElementById("gameModule");
-        ulBoard = el.querySelector("ul#gameBoard");
+        ulBoard = el.querySelector("ul#board");
         paragBtn = el.querySelector("#gameInitBtn");
         paragAnnounce = el.querySelector("#announceBoard");
         paragAlert = el.querySelector("#alertBoard");
         paragNextGame = nextGameDialog.querySelector("p");
         playerStatsRow = document.getElementById("playerStatsRow");
-        templateBoard = el.querySelector("#gameboard-template").innerHTML;
+        templateBoard = el.querySelector("#board-template").innerHTML;
         templateButton = document.querySelector("#startbtn-template").innerHTML;
         templateAnnounce = document.querySelector("#announceboard-template").innerHTML;
         templateAlert = document.querySelector("#alertboard-template").innerHTML;
@@ -77,7 +77,7 @@ const drawBoard = (() => {
 
     let _render = () => {
         const data = {
-            "gameboard" : [
+            "board" : [
                 // {
                 //     dataBoardNumber: 0,
                 //     dataPlayerTick: 0,
@@ -100,12 +100,12 @@ const drawBoard = (() => {
         let newObject = {};
 
         // process data for append
-        Object.keys(_gameboard).forEach(key => {
+        Object.keys(_board).forEach(key => {
             newObject = {}
             newObject["dataBoardNumber"] = key;
-            newObject["dataPlayerTick"] = _gameboard[key];
+            newObject["dataPlayerTick"] = _board[key];
 
-            switch(_gameboard[key]) {
+            switch(_board[key]) {
                 case 1 :
                     newObject["dataCross"] = "visible";
                     delete newObject["dataRound"];
@@ -117,13 +117,13 @@ const drawBoard = (() => {
                 default:
                     break;
             };
-            data.gameboard.push(newObject);
+            data.board.push(newObject);
         });
 
         if (_session.winMove) {
-            Object.keys(_gameboard).forEach((index, key) => {
+            Object.keys(_board).forEach((index, key) => {
                 if (Object.values(_session.winMove)[0].includes(Number(index))) {
-                    data.gameboard[index][`data${Object.keys(_session.winMove)[0]}`] = "visible";
+                    data.board[index][`data${Object.keys(_session.winMove)[0]}`] = "visible";
                 }
             })
         }
@@ -252,12 +252,12 @@ const drawBoard = (() => {
         if (_session.currentGame == 0) {
             gameMode.classList.add("visible");
             playerDetails.classList.add("visible");
-            statsCard.classList.remove("visible");
+            playerStats.classList.remove("visible");
 
             if (_player.length > 0) {
                 gameMode.classList.remove("visible");
                 playerDetails.classList.remove("visible");
-                statsCard.classList.add("visible");
+                playerStats.classList.add("visible");
             }
         } else {
             gameMode.classList.remove("visible");
@@ -331,7 +331,7 @@ const drawBoard = (() => {
     let _winTemplateHelper = (token) => {
         let winArr = [];
         let indexArg;
-        let boardSide = Math.sqrt(_gameboard.length);
+        let boardSide = Math.sqrt(_board.length);
         let limit = boardSide;
 
         if (token == "diagonal") {
@@ -441,9 +441,9 @@ const drawBoard = (() => {
 
         const boardNo = _session.currentBox.dataset.boardNo;
 
-        _gameboard[boardNo] = _player[_session["currentPlayerTurn"]].playerInfo().num;    // player[0] need to based on current user turn
+        _board[boardNo] = _player[_session["currentPlayerTurn"]].playerInfo().num;    // player[0] need to based on current user turn
 
-        if (_gameboard.filter(value => value != 0).length == 1) {
+        if (_board.filter(value => value != 0).length == 1) {
             _session.currentGame++;
         }
 
@@ -454,8 +454,8 @@ const drawBoard = (() => {
         const nextPlayerNum = _session.currentPlayerTurn == 0 ? 1 : 0;
         const indNotInclusive = 1;
 
-        const sameCurrentPlayer = (currentvalue) => _gameboard[currentvalue] == _session.currentPlayerTurn + indNotInclusive;
-        const sameNextPlayer = (currentvalue) => _gameboard[currentvalue] == nextPlayerNum + indNotInclusive;
+        const sameCurrentPlayer = (currentvalue) => _board[currentvalue] == _session.currentPlayerTurn + indNotInclusive;
+        const sameNextPlayer = (currentvalue) => _board[currentvalue] == nextPlayerNum + indNotInclusive;
 
         try {
 
@@ -534,7 +534,7 @@ const drawBoard = (() => {
         } else if (token == "tie") {
             _render();
 
-            if (_gameboard.every(obj => obj != 0)) {
+            if (_board.every(obj => obj != 0)) {
 
                 _session.lastGameResult.tie = 1;
                 ++_session.currentGameRound;
@@ -562,8 +562,8 @@ const drawBoard = (() => {
     let _computerMove = () => {
         const currentPlayerNum = _session.currentPlayerTurn;
         const nextPlayerNum = currentPlayerNum == 0 ? 1 : 0;
-        // const evaluate = Minimax(_gameboard, currentPlayerNum, nextPlayerNum).main();
-        const evaluate = MinimaxPruning(_gameboard, _gameRule.winCondition, currentPlayerNum, nextPlayerNum).main();
+        // const evaluate = Minimax(_board, currentPlayerNum, nextPlayerNum).main();
+        const evaluate = MinimaxPruning(_board, _gameRule.winCondition, currentPlayerNum, nextPlayerNum).main();
 
         _session.currentBox = ulBoard.querySelector(`li[data-board-no="${evaluate}"]`);
 
@@ -571,7 +571,7 @@ const drawBoard = (() => {
         // let moveAble = [];
         // let randomIndex;
 
-        // _gameboard.filter((item, ind) => {
+        // _board.filter((item, ind) => {
         //     if (item == 0) moveAble.push(ind);
         // });
 
@@ -594,8 +594,8 @@ const drawBoard = (() => {
         delete _session.winMove;
 
         try {
-            Object.keys(_gameboard).forEach(key => {
-                _gameboard[key] = 0;
+            Object.keys(_board).forEach(key => {
+                _board[key] = 0;
             });
         } catch (error){
             console.warn (`resetRound gameboardKey : ${error}`)

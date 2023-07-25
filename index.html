@@ -9,37 +9,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <dialog id="nextGameDialog">
-        <p id="nextGameStatement">
-            <script id="nextgamestatement-template" type="text/template">
-                {{#announceboard}}
-                    {{dataText}} How about another match?
-                {{/announceboard}}
-            </script>
-        </p>
-        <button class="dialogBtn confirm">Confirm</button>
-        <button class="dialogBtn cancel">Cancel</button>
-    </dialog>
     <aside></aside>
     <main>
         <header></header>
         <section id="gameModule">
             <h1>Tic Tac Toe</h1>
-            <fieldset id="gameMode">
-                <legend>Select the mode:</legend>
-
-                <ul>
-                    <li>
-                        <label for="pvp">Versus Another Player</label>
-                        <input type="radio" name="mode" id="pvp" value="pvp" checked>
-                    </li>
-                    <li>
-                        <label for="pvc">Versus Computer</label>
-                        <input type="radio" name="mode" id="pvc" value="pvc">
-                    </li>
-                </ul>
-            </fieldset>
-            <article id="statsCard">
+            <article id="gameCard">
                 <details id="playerStats" open>
                     <summary>DashBoard</summary>
                     <table>
@@ -72,9 +47,21 @@
                         </tbody>
                     </table>
                 </details>
-            </article>
-            <article id="gameCard">
                 <form>
+                    <fieldset id="gameMode">
+                        <legend>Select the mode:</legend>
+
+                        <ul>
+                            <li>
+                                <label for="pvp">Versus Another Player</label>
+                                <input type="radio" name="mode" id="pvp" value="pvp" checked>
+                            </li>
+                            <li>
+                                <label for="pvc">Versus Computer</label>
+                                <input type="radio" name="mode" id="pvc" value="pvc">
+                            </li>
+                        </ul>
+                    </fieldset>
                     <fieldset id="playerDetails">
                         <legend>Enter your name:</legend>
                         <ul>
@@ -112,9 +99,11 @@
                         {{/alertboard}}
                     </script>
                 </p>
-                <ul id="gameBoard">
-                    <script id="gameboard-template" type="text/template">
-                        {{#gameboard}}
+            </article>
+            <article id="gameBoard">
+                <ul id="board">
+                    <script id="board-template" type="text/template">
+                        {{#board}}
                             <li data-board-no="{{dataBoardNumber}}" data-player-tick="{{dataPlayerTick}}">
                                 <i class="tickCross {{dataCross}}"></i>
                                 <i class="tickRound {{dataRound}}"></i>
@@ -123,12 +112,25 @@
                                 <i class="lineDiagonalOne winLineDiagonal {{dataDiagonalOne}}"></i>
                                 <i class="lineDiagonalTwo winLineDiagonal {{dataDiagonalTwo}}"></i>
                             </li>
-                        {{/gameboard}}
+                        {{/board}}
                     </script>
                 </ul>
             </article>
         </section>
         <footer></footer>
     </main>
+    <!-- dialog -->
+    <dialog id="nextGameDialog">
+        <p id="nextGameStatement">
+            <script id="nextgamestatement-template" type="text/template">
+                {{#announceboard}}
+                    {{dataText}} How about another match?
+                {{/announceboard}}
+            </script>
+        </p>
+        <button class="dialogBtn confirm">Confirm</button>
+        <button class="dialogBtn cancel">Cancel</button>
+    </dialog>
+    <!-- dialog -->
 </body>
 </html>
