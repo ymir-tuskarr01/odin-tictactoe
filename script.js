@@ -120,6 +120,12 @@ const drawBoard = (() => {
             data.board.push(newObject);
         });
 
+        _board.map((value, index) => {
+            if (value == 0) {
+                data.board[index]["dataBoardEditable"] = "editable";
+            }
+        })
+
         if (_session.winMove) {
             Object.keys(_board).forEach((index, key) => {
                 if (Object.values(_session.winMove)[0].includes(Number(index))) {

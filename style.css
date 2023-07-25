@@ -10,6 +10,16 @@ body {
     margin: 0;
 }
 
+button,
+input[type="radio"],
+#board li.editable {
+    cursor: pointer;
+}
+
+#board li.editable:hover {
+    background-color: rgba(80, 80, 80, 0.1);
+}
+
 #gameModule {
     display: flex;
     flex-flow: row wrap;
