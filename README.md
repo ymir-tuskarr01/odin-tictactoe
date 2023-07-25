@@ -1,7 +1,7 @@
 # odin-tictactoe
 
 Live Demo:
-https://ymirtuskarr01.github.io/tictactoe
+https://ymirtuskarr01.github.io/odin-tictactoe
 
 ![Project Screenshot](./asset/images/tictactoe.png "TicTacToe")
 
