@@ -3,7 +3,7 @@
 Live Demo:
 https://ymirtuskarr01.github.io/odin-tictactoe
 
-![Project Screenshot](./asset/images/tictactoe.png "TicTacToe")
+![Project Screenshot](./images/tictactoe.png "TicTacToe")
 
 ### Objectives
 
